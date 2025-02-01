@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.RobotContainer;
 import org.photonvision.PhotonUtils;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonTrackedTarget;
@@ -38,7 +39,8 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
   private PhotonCamera camera;
-
+  
+  private DriveSubsystem driveSubsystem;
 
   private static final double CAMERA_HEIGHT_METERS = 0.6;
   private static final double TARGET_HEIGHT_METERS = 1.5;
@@ -61,6 +63,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     camera = new PhotonCamera("Microsoft_LifeCam_HD-3000");
     aprilTagFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
+    driveSubsystem = new DriveSubsystem();
   }
 
 
@@ -137,7 +140,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    driveSubsytem.setX();
+  }
 
 
   @Override
